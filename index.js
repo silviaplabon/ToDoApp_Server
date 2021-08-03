@@ -21,13 +21,23 @@ client.connect(err => {
                 res.send(products)
             })
     })
-    app.post('/add_To-Do', (req, res) => {
+    app.post('/add_To_Do', (req, res) => {
         const newToDo = req.body;
         ToDoCollection.insertOne(newToDo)
             .then(result => {
-                res.send(result.insertedCount > 0)
+                res.send(result)
             })
     })
+    app.patch('/edit_To_Do/:id', (req, res) => {
+        ToDoCollection.updateOne({ _id: ObjectID(req.params.id) },
+          {
+            $set: { completed:req.body.completed}
+          })
+          .then(result => {
+            res.send(result)
+          })
+      })
+    
     app.delete('/deleteProduct/PopularIngredients/:id', (req, res) => {
         PopularIngredientsCollection.deleteOne({ _id: ObjectID(req.params.id) })
             .then(result => {
