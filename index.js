@@ -40,7 +40,6 @@ client.connect(err => {
       })
     
     app.delete('/delete_To_Do/:id', (req, res) => {
-
         ToDoCollection.deleteOne({ _id: ObjectID(req.params.id) })
             .then(result => {
                 res.send(result.deletedCount>0)
@@ -48,7 +47,7 @@ client.connect(err => {
     })
 });
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening http://localhost:${port}`)
 })
 
 
