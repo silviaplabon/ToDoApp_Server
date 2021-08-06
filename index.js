@@ -16,7 +16,7 @@ client.connect(err => {
     const ToDoCollection = client.db('ToDoList').collection("ToDoCollection");
 
     app.get('/all_ToDo_List', (req, res) => {
-        ToDoCollection.find({})
+        ToDoCollection.find({{email: req.query.email }})
             .toArray((err, products) => {
                 res.send(products)
             })
